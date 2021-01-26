@@ -4,7 +4,7 @@ from magazine_spider.items import MagazineCover
 class MagazineSpider(scrapy.Spider):
     name = 'covers'
 
-    start_urls = ["http://www.coverbrowser.com/covers/wolverines"]
+    start_urls = ["http://www.coverbrowser.com/covers/wolverine"]
 
     def parse(self, response):
         for cover in response.css('p.cover'):
