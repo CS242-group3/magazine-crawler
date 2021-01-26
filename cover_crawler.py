@@ -1,5 +1,5 @@
 import scrapy
-import re
+from magazine_spider.items import MagazineCover
 
 class MagazineSpider(scrapy.Spider):
     name = 'covers'
