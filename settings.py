@@ -63,8 +63,17 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'magazine_spider.pipelines.MagazineSpiderPipeline': 1,
+    'scrapy.pipelines.images.ImagesPipeline': 1,
 }
+
+#FTP server storage, change to 
+#ftp://username:password@address:port/path OR
+#ftp://address:port/path 
+IMAGES_STORE = 'C:/Users/strck/magazine_spider/output'
+
+#additional settings required to enable the pipeline
+IMAGES_URLS_FIELD = 'image_urls'
+IMAGES_RESULT_FIELD = 'images'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -86,5 +95,3 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-
-IMAGES_STORE = 'C:/Users/strck/magazine_spider/output'
