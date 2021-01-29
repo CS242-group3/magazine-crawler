@@ -1,5 +1,6 @@
 import scrapy
-from magazine_spider.items import MagazineCover
+from urllib.parse import urljoin
+from magazine_spider.items import Magazine
 
 class MagazineSpider(scrapy.Spider):
     name = 'covers'
@@ -7,11 +8,11 @@ class MagazineSpider(scrapy.Spider):
     start_urls = ["http://www.coverbrowser.com/covers/wolverine"]
 
     def parse(self, response):
-        for cover in response.css('p.cover'):
-            yield{
-                'title' : cover.css('img::attr(alt)').get(),
-                'cover' : cover.css('img::attr(src)').get()
-            }
+        image_urls = response.css('p.cover img::attr(src)').getall()
+        for image_url in image_urls:
+            item = Magazine()
+            item['image_urls'] = [response.urljoin(image_url)]
+            yield item        
 
         page_links = response.css('p.issuesNavigationBottom a::attr(href)').getall()
         next_page = page_links[-1]
